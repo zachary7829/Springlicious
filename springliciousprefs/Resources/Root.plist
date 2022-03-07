@@ -84,15 +84,23 @@
 		</dict>
 		<dict>
 			<key>cell</key>
-			<string>PSSwitchCell</string>
+			<string>PSSliderCell</string>
 			<key>default</key>
-			<false/>
+			<integer>1</integer>
 			<key>defaults</key>
 			<string>com.zachary7829.springliciousprefs</string>
+			<key>max</key>
+			<real>1</real>
+			<key>min</key>
+			<real>0</real>
 			<key>key</key>
-			<string>isEnableHideFolderBackground</string>
+			<string>folderBackgroundTransparency</string>
+			<key>showValue</key>
+            		<true/>
+			<key>isSegmented</key>
+            		<false/>
 			<key>label</key>
-			<string>Hide Folder Background</string>
+			<string>Folder Background Transparency</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -116,7 +124,19 @@
 			<key>key</key>
 			<string>isEnableFiveIconRow</string>
 			<key>label</key>
-			<string>Five Icon Row</string>
+			<string>Five Icon Folder Row</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.zachary7829.springliciousprefs</string>
+			<key>key</key>
+			<string>isEnableRedDock</string>
+			<key>label</key>
+			<string>Red Dock</string>
 		</dict>
 		<dict>
 			<key>cell</key>

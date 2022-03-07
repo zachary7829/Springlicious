@@ -4,20 +4,6 @@
 
 HBPreferences *preferences;
 
-%hook SBIconListModel
-%property (nonatomic, strong) NSString *_springliciousLocation;
-
-typedef struct SBIconCoordinate {
-    NSInteger row;
-    NSInteger col;
-} SBIconCoordinate
-
-@interface SBIconListView : UIView
-- (SBIcon *)iconAtCoordinate:(SBIconCoordinate)co metrics:(id)metrics;
-- (SBIconCoordinate)coordinateForIcon:(id)icon;
-- (CGPoint)originForIconAtCoordinate:(SBIconCoordinate)co metrics:(id)metrics;
-@end
-
 %hook SBDockView
 -(void)setBackgroundAlpha:(double)arg1{
     if ([preferences boolForKey:@"isEnableHideDock"]) {
@@ -139,11 +125,7 @@ typedef struct SBIconCoordinate {
 
 %hook SBFloatyFolderView
 -(void)setBackgroundAlpha:(double)arg1{
-    if ([preferences boolForKey:@"isEnableHideFolderBackground"]) {
-        %orig(0.0);
-    } else {
-        %orig;
-    }
+    %orig([preferences floatForKey:@"folderBackgroundTransparency"]);
 }
 %end
 
@@ -157,12 +139,47 @@ typedef struct SBIconCoordinate {
 }
 %end
 
+/*
 %hook SBIconListGridLayoutConfiguration //iOS13&14, custom folder rows/columns
 -(NSUInteger)numberOfPortraitColumns{
     return @5;
 }
 -(NSUInteger)numberOfPortraitColumns{
     return @5;
+}
+%end
+*/
+
+%hook SBDockView
+-(void)setBackgroundView:(UIView *)view {
+    if ([preferences boolForKey:@"isEnableRedDock"]) {
+            view.backgroundColor = [UIColor redColor];
+            %orig;
+    } else {
+        %orig;
+    }
+}
+%end
+
+%hook SBFloatingDockView
+-(void)setBackgroundView:(UIView *)view {
+    if ([preferences boolForKey:@"isEnableRedDock"]) {
+            view.backgroundColor = [UIColor redColor];
+            %orig;
+    } else {
+        %orig;
+    }
+}
+%end
+
+%hook SBFloatingDockPlatterView
+-(void)setBackgroundView:(UIView *)view {
+    if ([preferences boolForKey:@"isEnableRedDock"]) {
+            view.backgroundColor = [UIColor redColor];
+            %orig;
+    } else {
+        %orig;
+    }
 }
 %end
 
