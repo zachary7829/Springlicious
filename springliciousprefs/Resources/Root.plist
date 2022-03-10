@@ -30,6 +30,18 @@
 			<key>defaults</key>
 			<string>com.zachary7829.springliciousprefs</string>
 			<key>key</key>
+			<string>isEnableHideDockBackground</string>
+			<key>label</key>
+			<string>Hide Dock Background</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.zachary7829.springliciousprefs</string>
+			<key>key</key>
 			<string>isEnableHidePageDots</string>
 			<key>label</key>
 			<string>Make Page Dots Invisible</string>
@@ -44,7 +56,7 @@
 			<key>key</key>
 			<string>isEnableHideVPN</string>
 			<key>label</key>
-			<string>Hide VPN Forever</string>
+			<string>Hide VPN In Status Bar</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -84,15 +96,29 @@
 		</dict>
 		<dict>
 			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.zachary7829.springliciousprefs</string>
+			<key>key</key>
+			<string>isEnableHideDNDSymbol</string>
+			<key>label</key>
+			<string>Hide Do Not Disturb Symbol</string>
+		</dict>
+		<dict>
+			<key>cell</key>
 			<string>PSSliderCell</string>
 			<key>default</key>
-			<integer>1</integer>
+			<integer>100</integer>
 			<key>defaults</key>
 			<string>com.zachary7829.springliciousprefs</string>
 			<key>max</key>
-			<real>1</real>
+			<real>100</real>
 			<key>min</key>
 			<real>0</real>
+			<key>id</key>
+			<string>folderBackgroundTransparency</string>
 			<key>key</key>
 			<string>folderBackgroundTransparency</string>
 			<key>showValue</key>
@@ -134,9 +160,69 @@
 			<key>defaults</key>
 			<string>com.zachary7829.springliciousprefs</string>
 			<key>key</key>
-			<string>isEnableRedDock</string>
+			<string>isEnableFiveIconColumn</string>
 			<key>label</key>
-			<string>Red Dock</string>
+			<string>Five Icon Folder Columns</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkListCell</string>
+			<key>defaults</key>
+            		<string>com.zachary7829.springliciousprefs</string>
+			<key>detail</key>
+           		<string>PSListItemsController</string>
+            		<key>key</key>
+            		<string>color_pref</string>
+            		<key>label</key>
+            		<string>Dock Color</string>
+            		<key>validTitles</key>
+            		<array>
+				<string>Default</string>
+                			<string>Red</string>
+                			<string>Blue</string>
+                			<string>Yellow</string>
+                			<string>Orange</string>
+                			<string>Magenta</string>
+                			<string>White</string>
+                			<string>Light Gray</string>
+                			<string>Dark Gray</string>
+                			<string>Green</string>
+                			<string>Gray</string>
+                			<string>Clear</string>
+                			<string>Brown</string>
+                			<string>Cyan</string>
+                			<string>Purple</string>
+                			<string>Light Text Color</string>
+                			<string>Black</string>
+            		</array>
+            		<key>validValues</key>
+            		<array>
+				<string>Default</string>
+                			<string>Red</string>
+                			<string>Blue</string>
+                			<string>Yellow</string>
+                			<string>Orange</string>
+                			<string>Magenta</string>
+                			<string>White</string>
+                			<string>Light Gray</string>
+                			<string>Dark Gray</string>
+                			<string>Green</string>
+                			<string>Gray</string>
+                			<string>Clear</string>
+                			<string>Brown</string>
+                			<string>Cyan</string>
+                			<string>Purple</string>
+                			<string>Light Text Color</string>
+                			<string>Black</string>
+            		</array>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>Reload SpringBoard</string>
+			<key>action</key>
+			<string>reloadSpringboard</string>
 		</dict>
 		<dict>
 			<key>cell</key>

@@ -11,6 +11,12 @@
 	return _specifiers;
 }
 
+- (void)reloadSpringboard {
+	NSTask *respring = [[NSTask alloc] init];
+	[respring setLaunchPath:@"/usr/bin/sbreload"];
+	[respring launch];
+}
+
 - (void)openGitHub {
 	[[UIApplication sharedApplication]
 	openURL:[NSURL URLWithString:@"https://github.com/zachary7829"]
