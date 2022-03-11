@@ -36,6 +36,108 @@
 		</dict>
 		<dict>
 			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<integer>100</integer>
+			<key>defaults</key>
+			<string>com.zachary7829.springliciousprefs</string>
+			<key>max</key>
+			<real>100</real>
+			<key>min</key>
+			<real>0</real>
+			<key>id</key>
+			<string>dockTransparency</string>
+			<key>key</key>
+			<string>dockTransparency</string>
+			<key>showValue</key>
+            		<true/>
+			<key>isSegmented</key>
+            		<false/>
+			<key>label</key>
+			<string>Dock Transparency</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<integer>100</integer>
+			<key>defaults</key>
+			<string>com.zachary7829.springliciousprefs</string>
+			<key>max</key>
+			<real>100</real>
+			<key>min</key>
+			<real>0</real>
+			<key>id</key>
+			<string>dockBackgroundTransparency</string>
+			<key>key</key>
+			<string>dockBackgroundTransparency</string>
+			<key>showValue</key>
+            		<true/>
+			<key>isSegmented</key>
+            		<false/>
+			<key>label</key>
+			<string>Dock Background Transparency</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkListCell</string>
+			<key>defaults</key>
+            		<string>com.zachary7829.springliciousprefs</string>
+			<key>detail</key>
+           		<string>PSListItemsController</string>
+            		<key>key</key>
+            		<string>color_pref</string>
+            		<key>label</key>
+            		<string>Dock Color</string>
+            		<key>validTitles</key>
+            		<array>
+				<string>Default</string>
+                			<string>Red</string>
+                			<string>Blue</string>
+                			<string>Yellow</string>
+                			<string>Orange</string>
+                			<string>Magenta</string>
+                			<string>White</string>
+                			<string>Light Gray</string>
+                			<string>Dark Gray</string>
+                			<string>Green</string>
+                			<string>Gray</string>
+                			<string>Clear</string>
+                			<string>Brown</string>
+                			<string>Cyan</string>
+                			<string>Purple</string>
+                			<string>Light Text Color</string>
+                			<string>Black</string>
+            		</array>
+            		<key>validValues</key>
+            		<array>
+				<string>Default</string>
+                			<string>Red</string>
+                			<string>Blue</string>
+                			<string>Yellow</string>
+                			<string>Orange</string>
+                			<string>Magenta</string>
+                			<string>White</string>
+                			<string>Light Gray</string>
+                			<string>Dark Gray</string>
+                			<string>Green</string>
+                			<string>Gray</string>
+                			<string>Clear</string>
+                			<string>Brown</string>
+                			<string>Cyan</string>
+                			<string>Purple</string>
+                			<string>Light Text Color</string>
+                			<string>Black</string>
+            		</array>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Page Dots</string>
+		</dict>
+		<dict>
+			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>default</key>
 			<false/>
@@ -45,6 +147,12 @@
 			<string>isEnableHidePageDots</string>
 			<key>label</key>
 			<string>Make Page Dots Invisible</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Status Bar</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -108,6 +216,12 @@
 		</dict>
 		<dict>
 			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Folders</string>
+		</dict>
+		<dict>
+			<key>cell</key>
 			<string>PSSliderCell</string>
 			<key>default</key>
 			<integer>100</integer>
@@ -160,9 +274,81 @@
 			<key>defaults</key>
 			<string>com.zachary7829.springliciousprefs</string>
 			<key>key</key>
+			<string>isEnableHideFolderTitle</string>
+			<key>label</key>
+			<string>Hide Folder Title</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.zachary7829.springliciousprefs</string>
+			<key>key</key>
 			<string>isEnableFiveIconColumn</string>
 			<key>label</key>
 			<string>Five Icon Folder Columns</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.zachary7829.springliciousprefs</string>
+			<key>key</key>
+			<string>isEnableHideVolume</string>
+			<key>label</key>
+			<string>Hide Volume Slider</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.zachary7829.springliciousprefs</string>
+			<key>key</key>
+			<string>isEnableHideDNDBanner</string>
+			<key>label</key>
+			<string>Hide Do Not Disturb Banner</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.zachary7829.springliciousprefs</string>
+			<key>key</key>
+			<string>isEnableHideAppLabels</string>
+			<key>label</key>
+			<string>Hide App Labels</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.zachary7829.springliciousprefs</string>
+			<key>key</key>
+			<string>isEnableHideCCStatusBar</string>
+			<key>label</key>
+			<string>Hide Control Center Status Bar</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.zachary7829.springliciousprefs</string>
+			<key>key</key>
+			<string>isEnableHideStatusBar</string>
+			<key>label</key>
+			<string>Hide Status Bar</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -172,9 +358,9 @@
 			<key>detail</key>
            		<string>PSListItemsController</string>
             		<key>key</key>
-            		<string>color_pref</string>
+            		<string>wifi_symbol_color_pref</string>
             		<key>label</key>
-            		<string>Dock Color</string>
+            		<string>Wifi Symbol Color</string>
             		<key>validTitles</key>
             		<array>
 				<string>Default</string>

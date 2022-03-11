@@ -4,7 +4,34 @@
 
 HBPreferences *preferences;
 
+@interface SBDockView : UIView
+@end
+
+@interface SBFloatingDockView : UIView
+@end
+
+@interface SBFloatingDockPlatterView : UIView
+@end
+
+@interface _UIStatusBar : UIView
+@end
+
+@interface _UIStatusBarWifiSignalView : UIView
+@end
+
+@interface _UIStatusBarImageView : UIView
+@end
+
+@interface SBFolderTitleTextField : UIView
+@end
+
 %hook SBDockView
+-(CGRect)frame {
+	CGRect ret = %orig;
+	CGFloat setDockTransparency = [preferences floatForKey:@"dockTransparency"];
+	self.alpha = setDockTransparency / 100;
+	return ret;
+}
 -(void)setBackgroundAlpha:(double)arg1{
     if ([preferences boolForKey:@"isEnableHideDockBackground"]) {
         %orig(0.0);
@@ -35,6 +62,12 @@ HBPreferences *preferences;
 %end
 
 %hook SBFloatingDockView
+-(CGRect)frame {
+	CGRect ret = %orig;
+	CGFloat setDockTransparency = [preferences floatForKey:@"dockTransparency"];
+	self.alpha = setDockTransparency / 100;
+	return ret;
+}
 -(void)setHidden:(BOOL)arg1 {
     if ([preferences boolForKey:@"isEnableHideDock"]) {
         %orig(YES);
@@ -111,6 +144,18 @@ HBPreferences *preferences;
 }
 %end
 
+%hook SBVolumeHUDViewController
+-(CGRect)frame {
+    if ([preferences boolForKey:@"isEnableHideVolume"]) {
+        CGRect ret = %orig;
+        self.hidden = YES;
+        return ret;
+    } else {
+        return %orig;
+    }
+}
+%end
+
 %hook SBIconListPageControl
 -(void)setHidden:(BOOL)arg1 {
     if ([preferences boolForKey:@"isEnableHidePageDots"]) {
@@ -132,13 +177,14 @@ HBPreferences *preferences;
 %end
 
 %hook BCBatteryDevice //change to hooking the uiview, hooking bcbatterydevice while more affective can potentially be dangerous
--(bool)isCharging {
+-(void)setShowsInlineChargingIndicator:(BOOL)enabled {
     if ([preferences boolForKey:@"isEnableHideBatteryCharge"]) {
-        return 0;
+        %orig(0);
     } else {
-        return %orig;
+        %orig;
     }
 }
+
 -(long long)percentCharge {
     if ([preferences boolForKey:@"isSpoofBatteryPercent"]) {
         return 69; //For faking device percentage, finish later
@@ -148,12 +194,20 @@ HBPreferences *preferences;
 }
 %end
 
-%hook SBSystemStatusWifiDataProvider //I should probably hook the view instead
--(bool)isWifiActive {
+%hook _UIStatusBarWifiSignalView
+-(CGRect)frame {
     if ([preferences boolForKey:@"isEnableHideWifiConnection"]) {
-        return 0;
+        CGRect ret = %orig;
+        self.hidden = YES;
+        return ret;
     } else {
-        return %orig;
+	if ([[preferences objectForKey:@"wifi_symbol_color_pref"]isEqual:@"Red"]) {
+		CGRect ret = %orig;
+		self.backgroundColor = [UIColor redColor];
+		return ret;
+	} else {
+		return %orig;
+	}
     }
 }
 %end
@@ -175,24 +229,78 @@ HBPreferences *preferences;
 }
 %end
 
-/*
+%hook DNDNotificationsService
+-(void)_queue_postOrRemoveNotificationWithUpdatedBehavior:(BOOL)arg1 significantTimeChange:(BOOL)arg2{
+    if ([preferences boolForKey:@"isEnableHideDNDBanner"]) {
+
+    } else {
+        %orig;
+    }
+}
+%end
+
+%hook _UIStatusBarImageView
+-(CGRect)frame {
+    if ([preferences boolForKey:@"isEnableHideDNDSymbol"]) {
+        CGRect ret = %orig;
+        self.hidden = YES;
+        return ret;
+    } else {
+        return %orig;
+    }
+}
+%end
+
 %hook SBIconListGridLayoutConfiguration //iOS13&14, custom folder rows/columns
 -(NSUInteger)numberOfPortraitRows{
     if ([preferences boolForKey:@"isEnableFiveIconRow"]) {
-        return @5;
+        return 5;
     } else {
         return %orig;
     }
 }
 -(NSUInteger)numberOfPortraitColumns{
     if ([preferences boolForKey:@"isEnableFiveIconColumn"]) {
-        return @5;
+        return 5;
     } else {
         return %orig;
     }
 }
 %end
-*/
+
+%hook SBIconView
+- (void)setLabelHidden:(BOOL)arg1 {
+    if ([preferences boolForKey:@"isEnableHideAppLabels"]) {
+        %orig(YES);
+    } else {
+        %orig;
+    }
+}
+%end
+
+%hook _UIStatusBar
+-(CGRect)frame {
+    if ([preferences boolForKey:@"isEnableHideStatusBar"]) {
+        CGRect ret = %orig;
+        self.hidden = YES;
+        return ret;
+    } else {
+        return %orig;
+    }
+}
+%end
+
+%hook SBFolderTitleTextField
+-(CGRect)frame {
+    if ([preferences boolForKey:@"isEnableHideFolderTitle"]) {
+        CGRect ret = %orig;
+        self.hidden = YES;
+        return ret;
+    } else {
+        return %orig;
+    }
+}
+%end
 
 %hook SBFDeviceBlockTimer //thanks to nyuszika7h for this
 - (NSString *)subtitleText {
