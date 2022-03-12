@@ -8,7 +8,7 @@
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>Springlicious</string>
+			<string>Dock</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -24,27 +24,23 @@
 		</dict>
 		<dict>
 			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>com.zachary7829.springliciousprefs</string>
-			<key>key</key>
-			<string>isEnableHideDockBackground</string>
+			<string>PSStaticTextCell</string>
+			<key>enabled</key>
+			<true />
 			<key>label</key>
-			<string>Hide Dock Background</string>
+			<string>Dock Opacity</string>
 		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSSliderCell</string>
 			<key>default</key>
-			<integer>100</integer>
+			<real>100</real>
 			<key>defaults</key>
 			<string>com.zachary7829.springliciousprefs</string>
 			<key>max</key>
 			<real>100</real>
 			<key>min</key>
-			<real>0</real>
+			<real>1</real>
 			<key>id</key>
 			<string>dockTransparency</string>
 			<key>key</key>
@@ -54,29 +50,7 @@
 			<key>isSegmented</key>
             		<false/>
 			<key>label</key>
-			<string>Dock Transparency</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSliderCell</string>
-			<key>default</key>
-			<integer>100</integer>
-			<key>defaults</key>
-			<string>com.zachary7829.springliciousprefs</string>
-			<key>max</key>
-			<real>100</real>
-			<key>min</key>
-			<real>0</real>
-			<key>id</key>
-			<string>dockBackgroundTransparency</string>
-			<key>key</key>
-			<string>dockBackgroundTransparency</string>
-			<key>showValue</key>
-            		<true/>
-			<key>isSegmented</key>
-            		<false/>
-			<key>label</key>
-			<string>Dock Background Transparency</string>
+			<string>Dock Opacity</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -162,6 +136,18 @@
 			<key>defaults</key>
 			<string>com.zachary7829.springliciousprefs</string>
 			<key>key</key>
+			<string>isEnableHideStatusBar</string>
+			<key>label</key>
+			<string>Hide Status Bar</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.zachary7829.springliciousprefs</string>
+			<key>key</key>
 			<string>isEnableHideVPN</string>
 			<key>label</key>
 			<string>Hide VPN In Status Bar</string>
@@ -188,6 +174,36 @@
 			<key>key</key>
 			<string>isSpoofBatteryPercent</string>
 			<key>label</key>
+			<string>Enable Battery Spoofing</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSStaticTextCell</string>
+			<key>enabled</key>
+			<true />
+			<key>label</key>
+			<string>Spoofed Battery Percent</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<real>100</real>
+			<key>defaults</key>
+			<string>com.zachary7829.springliciousprefs</string>
+			<key>max</key>
+			<real>100</real>
+			<key>min</key>
+			<real>5</real>
+			<key>id</key>
+			<string>spoofBattery</string>
+			<key>key</key>
+			<string>spoofBattery</string>
+			<key>showValue</key>
+            		<true/>
+			<key>isSegmented</key>
+            		<false/>
+			<key>label</key>
 			<string>Spoof Battery Percent</string>
 		</dict>
 		<dict>
@@ -204,33 +220,29 @@
 		</dict>
 		<dict>
 			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>com.zachary7829.springliciousprefs</string>
-			<key>key</key>
-			<string>isEnableHideDNDSymbol</string>
-			<key>label</key>
-			<string>Hide Do Not Disturb Symbol</string>
-		</dict>
-		<dict>
-			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
 			<string>Folders</string>
 		</dict>
 		<dict>
 			<key>cell</key>
+			<string>PSStaticTextCell</string>
+			<key>enabled</key>
+			<true />
+			<key>label</key>
+			<string>Folder Background Opacity</string>
+		</dict>
+		<dict>
+			<key>cell</key>
 			<string>PSSliderCell</string>
 			<key>default</key>
-			<integer>100</integer>
+			<real>100</real>
 			<key>defaults</key>
 			<string>com.zachary7829.springliciousprefs</string>
 			<key>max</key>
 			<real>100</real>
 			<key>min</key>
-			<real>0</real>
+			<real>1</real>
 			<key>id</key>
 			<string>folderBackgroundTransparency</string>
 			<key>key</key>
@@ -240,31 +252,59 @@
 			<key>isSegmented</key>
             		<false/>
 			<key>label</key>
-			<string>Folder Background Transparency</string>
+			<string>Folder Background Opacity</string>
 		</dict>
 		<dict>
 			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<false/>
+			<string>PSLinkListCell</string>
 			<key>defaults</key>
-			<string>com.zachary7829.springliciousprefs</string>
-			<key>key</key>
-			<string>isEnableHideFolderIconBackground</string>
-			<key>label</key>
-			<string>Hide Folder Icon Background</string>
+            		<string>com.zachary7829.springliciousprefs</string>
+			<key>detail</key>
+           		<string>PSListItemsController</string>
+            		<key>key</key>
+            		<string>folder_row_pref</string>
+            		<key>label</key>
+            		<string>Folder Icon Rows</string>
+            		<key>validTitles</key>
+            		<array>
+				<string>Default</string>
+                			<string>4</string>
+                			<string>5</string>
+                			<string>6</string>
+            		</array>
+            		<key>validValues</key>
+            		<array>
+				<string>Default</string>
+                			<string>4</string>
+                			<string>5</string>
+                			<string>6</string>
+            		</array>
 		</dict>
 		<dict>
 			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<false/>
+			<string>PSLinkListCell</string>
 			<key>defaults</key>
-			<string>com.zachary7829.springliciousprefs</string>
-			<key>key</key>
-			<string>isEnableFiveIconRow</string>
-			<key>label</key>
-			<string>Five Icon Folder Row</string>
+            		<string>com.zachary7829.springliciousprefs</string>
+			<key>detail</key>
+           		<string>PSListItemsController</string>
+            		<key>key</key>
+            		<string>folder_column_pref</string>
+            		<key>label</key>
+            		<string>Folder Icon Column</string>
+            		<key>validTitles</key>
+            		<array>
+				<string>Default</string>
+                			<string>4</string>
+                			<string>5</string>
+                			<string>6</string>
+            		</array>
+            		<key>validValues</key>
+            		<array>
+				<string>Default</string>
+                			<string>4</string>
+                			<string>5</string>
+                			<string>6</string>
+            		</array>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -280,15 +320,9 @@
 		</dict>
 		<dict>
 			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>com.zachary7829.springliciousprefs</string>
-			<key>key</key>
-			<string>isEnableFiveIconColumn</string>
+			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>Five Icon Folder Columns</string>
+			<string>Miscellaneous</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -334,9 +368,9 @@
 			<key>defaults</key>
 			<string>com.zachary7829.springliciousprefs</string>
 			<key>key</key>
-			<string>isEnableHideCCStatusBar</string>
+			<string>isEnableHideOffloadIcon</string>
 			<key>label</key>
-			<string>Hide Control Center Status Bar</string>
+			<string>Hide Offload Icon</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -346,61 +380,9 @@
 			<key>defaults</key>
 			<string>com.zachary7829.springliciousprefs</string>
 			<key>key</key>
-			<string>isEnableHideStatusBar</string>
+			<string>isEnableHideTestflightAppDots</string>
 			<key>label</key>
-			<string>Hide Status Bar</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSLinkListCell</string>
-			<key>defaults</key>
-            		<string>com.zachary7829.springliciousprefs</string>
-			<key>detail</key>
-           		<string>PSListItemsController</string>
-            		<key>key</key>
-            		<string>wifi_symbol_color_pref</string>
-            		<key>label</key>
-            		<string>Wifi Symbol Color</string>
-            		<key>validTitles</key>
-            		<array>
-				<string>Default</string>
-                			<string>Red</string>
-                			<string>Blue</string>
-                			<string>Yellow</string>
-                			<string>Orange</string>
-                			<string>Magenta</string>
-                			<string>White</string>
-                			<string>Light Gray</string>
-                			<string>Dark Gray</string>
-                			<string>Green</string>
-                			<string>Gray</string>
-                			<string>Clear</string>
-                			<string>Brown</string>
-                			<string>Cyan</string>
-                			<string>Purple</string>
-                			<string>Light Text Color</string>
-                			<string>Black</string>
-            		</array>
-            		<key>validValues</key>
-            		<array>
-				<string>Default</string>
-                			<string>Red</string>
-                			<string>Blue</string>
-                			<string>Yellow</string>
-                			<string>Orange</string>
-                			<string>Magenta</string>
-                			<string>White</string>
-                			<string>Light Gray</string>
-                			<string>Dark Gray</string>
-                			<string>Green</string>
-                			<string>Gray</string>
-                			<string>Clear</string>
-                			<string>Brown</string>
-                			<string>Cyan</string>
-                			<string>Purple</string>
-                			<string>Light Text Color</string>
-                			<string>Black</string>
-            		</array>
+			<string>Hide Testflight App Dots</string>
 		</dict>
 		<dict>
 			<key>cell</key>

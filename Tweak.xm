@@ -25,10 +25,22 @@ HBPreferences *preferences;
 @interface SBFolderTitleTextField : UIView
 @end
 
+@interface SBIconCloudLabelAccessoryView : UIView
+@end
+
+@interface SBIconBetaLabelAccessoryView : UIView
+@end
+
+@interface SBFolderControllerBackgroundView : UIView
+@end
+
 %hook SBDockView
 -(CGRect)frame {
 	CGRect ret = %orig;
 	CGFloat setDockTransparency = [preferences floatForKey:@"dockTransparency"];
+	if (!(setDockTransparency >= 1)){
+		setDockTransparency = 100;
+	}
 	self.alpha = setDockTransparency / 100;
 	return ret;
 }
@@ -65,6 +77,9 @@ HBPreferences *preferences;
 -(CGRect)frame {
 	CGRect ret = %orig;
 	CGFloat setDockTransparency = [preferences floatForKey:@"dockTransparency"];
+	if (!(setDockTransparency >= 1)){
+		setDockTransparency = 100;
+	}
 	self.alpha = setDockTransparency / 100;
 	return ret;
 }
@@ -85,6 +100,36 @@ HBPreferences *preferences;
 -(void)setBackgroundView:(UIView *)view {
     if ([[preferences objectForKey:@"color_pref"]isEqual:@"Red"]) {
             view.backgroundColor = [UIColor redColor];
+    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Yellow"]) {
+            view.backgroundColor = [UIColor yellowColor];
+    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Brown"]) {
+            view.backgroundColor = [UIColor brownColor];
+    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Clear"]) {
+            view.backgroundColor = [UIColor clearColor];
+    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Gray"]) {
+            view.backgroundColor = [UIColor grayColor];
+    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Green"]) {
+            view.backgroundColor = [UIColor greenColor];
+    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Dark Gray"]) {
+            view.backgroundColor = [UIColor darkGrayColor];
+    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Light Gray"]) {
+            view.backgroundColor = [UIColor lightGrayColor];
+    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"White"]) {
+            view.backgroundColor = [UIColor whiteColor];
+    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Blue"]) {
+            view.backgroundColor = [UIColor blueColor];
+    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Magenta"]) {
+            view.backgroundColor = [UIColor magentaColor];
+    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Orange"]) {
+            view.backgroundColor = [UIColor orangeColor];
+    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Cyan"]) {
+            view.backgroundColor = [UIColor cyanColor];
+    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Purple"]) {
+            view.backgroundColor = [UIColor purpleColor];
+    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Light Text Color"]) {
+            view.backgroundColor = [UIColor lightTextColor];
+    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Black"]) {
+            view.backgroundColor = [UIColor blackColor];
     }
     %orig;
 }
@@ -145,11 +190,9 @@ HBPreferences *preferences;
 %end
 
 %hook SBVolumeHUDViewController
--(CGRect)frame {
+-(void)viewDidLoad {
     if ([preferences boolForKey:@"isEnableHideVolume"]) {
-        CGRect ret = %orig;
-        self.hidden = YES;
-        return ret;
+
     } else {
         return %orig;
     }
@@ -176,7 +219,7 @@ HBPreferences *preferences;
 }
 %end
 
-%hook BCBatteryDevice //change to hooking the uiview, hooking bcbatterydevice while more affective can potentially be dangerous
+%hook _UIBatteryView
 -(void)setShowsInlineChargingIndicator:(BOOL)enabled {
     if ([preferences boolForKey:@"isEnableHideBatteryCharge"]) {
         %orig(0);
@@ -184,10 +227,16 @@ HBPreferences *preferences;
         %orig;
     }
 }
+%end
 
+%hook BCBatteryDevice //change to hooking the uiview, hooking bcbatterydevice while more affective can potentially fuck up battery stats in settings
 -(long long)percentCharge {
     if ([preferences boolForKey:@"isSpoofBatteryPercent"]) {
-        return 69; //For faking device percentage, finish later
+	CGFloat setSpoofBatteryPercent = [preferences floatForKey:@"spoofBattery"];
+	if (!(setSpoofBatteryPercent >= 3)){
+		setSpoofBatteryPercent = 100;
+	}
+        return setSpoofBatteryPercent; //For faking device percentage, finish later
     } else {
         return %orig;
     }
@@ -201,21 +250,18 @@ HBPreferences *preferences;
         self.hidden = YES;
         return ret;
     } else {
-	if ([[preferences objectForKey:@"wifi_symbol_color_pref"]isEqual:@"Red"]) {
-		CGRect ret = %orig;
-		self.backgroundColor = [UIColor redColor];
-		return ret;
-	} else {
-		return %orig;
-	}
+	return %orig;
     }
 }
 %end
 
 %hook SBFloatyFolderView
 -(void)setBackgroundAlpha:(double)arg1{
-    CGFloat setFolderBGTransparency = [preferences floatForKey:@"folderBackgroundTransparency"];
-    %orig(setFolderBGTransparency / 100);
+	CGFloat setFolderBGTransparency = [preferences floatForKey:@"folderBackgroundTransparency"];
+	if (!(setFolderBGTransparency >= 1)){
+		setFolderBGTransparency = 100;
+	}
+	%orig(setFolderBGTransparency / 100);
 }
 %end
 
@@ -239,31 +285,27 @@ HBPreferences *preferences;
 }
 %end
 
-%hook _UIStatusBarImageView
--(CGRect)frame {
-    if ([preferences boolForKey:@"isEnableHideDNDSymbol"]) {
-        CGRect ret = %orig;
-        self.hidden = YES;
-        return ret;
-    } else {
-        return %orig;
-    }
-}
-%end
-
 %hook SBIconListGridLayoutConfiguration //iOS13&14, custom folder rows/columns
 -(NSUInteger)numberOfPortraitRows{
-    if ([preferences boolForKey:@"isEnableFiveIconRow"]) {
-        return 5;
+    if ([[preferences objectForKey:@"folder_row_pref"]isEqual:@"4"]) {
+            return 4;
+    } else if ([[preferences objectForKey:@"folder_row_pref"]isEqual:@"5"]) {
+            return 5;
+    } else if ([[preferences objectForKey:@"folder_row_pref"]isEqual:@"6"]) {
+            return 6;
     } else {
-        return %orig;
+            return %orig;
     }
 }
 -(NSUInteger)numberOfPortraitColumns{
-    if ([preferences boolForKey:@"isEnableFiveIconColumn"]) {
-        return 5;
+    if ([[preferences objectForKey:@"folder_column_pref"]isEqual:@"4"]) {
+            return 4;
+    } else if ([[preferences objectForKey:@"folder_column_pref"]isEqual:@"5"]) {
+            return 5;
+    } else if ([[preferences objectForKey:@"folder_column_pref"]isEqual:@"6"]) {
+            return 6;
     } else {
-        return %orig;
+            return %orig;
     }
 }
 %end
@@ -302,9 +344,27 @@ HBPreferences *preferences;
 }
 %end
 
-%hook SBFDeviceBlockTimer //thanks to nyuszika7h for this
-- (NSString *)subtitleText {
-    return @"suck my cock"; //change iPhone disable text on lockscreen
+%hook SBIconCloudLabelAccessoryView
+-(CGRect)frame {
+    if ([preferences boolForKey:@"isEnableHideOffloadIcon"]) {
+        CGRect ret = %orig;
+        self.hidden = YES;
+        return ret;
+    } else {
+        return %orig;
+    }
+}
+%end
+
+%hook SBIconBetaLabelAccessoryView
+-(CGRect)frame {
+    if ([preferences boolForKey:@"isEnableHideTestflightAppDots"]) {
+        CGRect ret = %orig;
+        self.hidden = YES;
+        return ret;
+    } else {
+        return %orig;
+    }
 }
 %end
 
