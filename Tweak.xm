@@ -1,8 +1,6 @@
 #import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
-#import <Cephei/HBPreferences.h>
 
-HBPreferences *preferences;
+NSUserDefaults *preferences;
 
 @interface SBDockView : UIView
 @end
@@ -66,7 +64,7 @@ HBPreferences *preferences;
     }
 }
 -(void)setBackgroundView:(UIView *)view {
-    if ([[preferences objectForKey:@"color_pref"]isEqual:@"Red"]) {
+    if ([[preferences objectForKey:@"color_pref"]isEqual:@"redColor"]) {
             view.backgroundColor = [UIColor redColor];    
     }
     %orig;
@@ -98,38 +96,10 @@ HBPreferences *preferences;
     }
 }
 -(void)setBackgroundView:(UIView *)view {
-    if ([[preferences objectForKey:@"color_pref"]isEqual:@"Red"]) {
-            view.backgroundColor = [UIColor redColor];
-    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Yellow"]) {
-            view.backgroundColor = [UIColor yellowColor];
-    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Brown"]) {
-            view.backgroundColor = [UIColor brownColor];
-    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Clear"]) {
-            view.backgroundColor = [UIColor clearColor];
-    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Gray"]) {
-            view.backgroundColor = [UIColor grayColor];
-    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Green"]) {
-            view.backgroundColor = [UIColor greenColor];
-    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Dark Gray"]) {
-            view.backgroundColor = [UIColor darkGrayColor];
-    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Light Gray"]) {
-            view.backgroundColor = [UIColor lightGrayColor];
-    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"White"]) {
-            view.backgroundColor = [UIColor whiteColor];
-    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Blue"]) {
-            view.backgroundColor = [UIColor blueColor];
-    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Magenta"]) {
-            view.backgroundColor = [UIColor magentaColor];
-    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Orange"]) {
-            view.backgroundColor = [UIColor orangeColor];
-    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Cyan"]) {
-            view.backgroundColor = [UIColor cyanColor];
-    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Purple"]) {
-            view.backgroundColor = [UIColor purpleColor];
-    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Light Text Color"]) {
-            view.backgroundColor = [UIColor lightTextColor];
-    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Black"]) {
-            view.backgroundColor = [UIColor blackColor];
+    SEL colorSelector = NSSelectorFromString([preferences stringForKey:@"color_pref"]);
+
+    if (colorSelector && [UIColor respondsToSelector:colorSelector]) {
+        view.backgroundColor = ((UIColor*(*)(Class, SEL)) objc_msgSend) (UIColor.class, colorSelector);
     }
     %orig;
 }
@@ -152,38 +122,10 @@ HBPreferences *preferences;
 }
 -(void)setBackgroundView:(UIView *)view {
     //YandereDev code time, what's a switch case anyway?
-    if ([[preferences objectForKey:@"color_pref"]isEqual:@"Red"]) {
-            view.backgroundColor = [UIColor redColor];
-    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Yellow"]) {
-            view.backgroundColor = [UIColor yellowColor];
-    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Brown"]) {
-            view.backgroundColor = [UIColor brownColor];
-    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Clear"]) {
-            view.backgroundColor = [UIColor clearColor];
-    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Gray"]) {
-            view.backgroundColor = [UIColor grayColor];
-    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Green"]) {
-            view.backgroundColor = [UIColor greenColor];
-    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Dark Gray"]) {
-            view.backgroundColor = [UIColor darkGrayColor];
-    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Light Gray"]) {
-            view.backgroundColor = [UIColor lightGrayColor];
-    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"White"]) {
-            view.backgroundColor = [UIColor whiteColor];
-    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Blue"]) {
-            view.backgroundColor = [UIColor blueColor];
-    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Magenta"]) {
-            view.backgroundColor = [UIColor magentaColor];
-    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Orange"]) {
-            view.backgroundColor = [UIColor orangeColor];
-    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Cyan"]) {
-            view.backgroundColor = [UIColor cyanColor];
-    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Purple"]) {
-            view.backgroundColor = [UIColor purpleColor];
-    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Light Text Color"]) {
-            view.backgroundColor = [UIColor lightTextColor];
-    } else if ([[preferences objectForKey:@"color_pref"]isEqual:@"Black"]) {
-            view.backgroundColor = [UIColor blackColor];
+    SEL colorSelector = NSSelectorFromString([preferences stringForKey:@"color_pref"]);
+
+    if (colorSelector && [UIColor respondsToSelector:colorSelector]) {
+        view.backgroundColor = ((UIColor*(*)(Class, SEL)) objc_msgSend) (UIColor.class, colorSelector);
     }
     %orig;
 }
@@ -369,5 +311,5 @@ HBPreferences *preferences;
 %end
 
 %ctor {
-  preferences = [[HBPreferences alloc] initWithIdentifier:@"com.zachary7829.springliciousprefs"];
+  preferences = [[NSUserDefaults alloc] initWithSuiteName:@"com.zachary7829.springliciousprefs"];
 }
