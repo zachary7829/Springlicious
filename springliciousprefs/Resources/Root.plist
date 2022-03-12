@@ -86,22 +86,22 @@
             		<key>validValues</key>
             		<array>
 				<string>Default</string>
-                			<string>Red</string>
-                			<string>Blue</string>
-                			<string>Yellow</string>
-                			<string>Orange</string>
-                			<string>Magenta</string>
-                			<string>White</string>
-                			<string>Light Gray</string>
-                			<string>Dark Gray</string>
-                			<string>Green</string>
-                			<string>Gray</string>
-                			<string>Clear</string>
-                			<string>Brown</string>
-                			<string>Cyan</string>
-                			<string>Purple</string>
-                			<string>Light Text Color</string>
-                			<string>Black</string>
+                			<string>redColor</string>
+                			<string>whiteColor</string>
+                			<string>yellowColor</string>
+                			<string>orangeColor</string>
+                			<string>magentaColor</string>
+                			<string>whiteColor</string>
+                			<string>lightGrayColor</string>
+                			<string>darkGrayColor</string>
+                			<string>greenColor</string>
+                			<string>grayColor</string>
+                			<string>clearColor</string>
+                			<string>brownColor</string>
+                			<string>cyanColor</string>
+                			<string>purpleColor</string>
+                			<string>lightTextColorr</string>
+                			<string>blackColor</string>
             		</array>
 		</dict>
 		<dict>
