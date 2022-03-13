@@ -9,7 +9,6 @@ TWEAK_NAME = Springlicious
 
 Springlicious_FILES = Tweak.xm
 Springlicious_CFLAGS = -fobjc-arc
-Springlicious_EXTRA_FRAMEWORKS += Cephei
 
 include $(THEOS_MAKE_PATH)/tweak.mk
 SUBPROJECTS += springliciousprefs

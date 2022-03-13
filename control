@@ -2,8 +2,8 @@ Package: com.zachary7829.springlicious
 Name: Springlicious
 Author: zachary7829
 Description: FOSS SpringBoard Customization Tweak
-Depends: mobilesubstrate (>= 0.9.5000), preferenceloader (>= 2.2.3), ws.hbang.common
+Depends: mobilesubstrate (>= 0.9.5000), preferenceloader (>= 2.2.3), firmware (>= 13.0)
 Maintainer: zachary7829
 Architecture: iphoneos-arm
 Section: Tweaks
-Version: 1.0.0
+Version: 1.1

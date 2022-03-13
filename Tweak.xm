@@ -32,6 +32,21 @@ NSUserDefaults *preferences;
 @interface SBFolderControllerBackgroundView : UIView
 @end
 
+@interface SBIconBadgeView : UIView
+@end
+
+@interface SBIconListView : UIView
+@end
+
+@interface NCNotificationListView : UIView
+@end
+
+@interface SBFLockScreenDateView : UIView
+@end
+
+@interface SBControlCenterWindow : UIView
+@end
+
 %hook SBDockView
 -(CGRect)frame {
 	CGRect ret = %orig;
@@ -64,8 +79,9 @@ NSUserDefaults *preferences;
     }
 }
 -(void)setBackgroundView:(UIView *)view {
-    if ([[preferences objectForKey:@"color_pref"]isEqual:@"redColor"]) {
-            view.backgroundColor = [UIColor redColor];    
+    SEL colorSelector = NSSelectorFromString([preferences stringForKey:@"color_pref"]);
+    if (colorSelector && [UIColor respondsToSelector:colorSelector]) {
+        view.backgroundColor = ((UIColor*(*)(Class, SEL)) objc_msgSend) (UIColor.class, colorSelector);
     }
     %orig;
 }
@@ -269,7 +285,13 @@ NSUserDefaults *preferences;
         self.hidden = YES;
         return ret;
     } else {
-        return %orig;
+	CGRect ret = %orig;
+	CGFloat setStatusBarTransparency = [preferences floatForKey:@"statusBarTransparency"];
+	if (!(setStatusBarTransparency >= 1)){
+		setStatusBarTransparency = 100;
+	}
+	self.alpha = setStatusBarTransparency / 100;
+	return ret;
     }
 }
 %end
@@ -307,6 +329,66 @@ NSUserDefaults *preferences;
     } else {
         return %orig;
     }
+}
+%end
+
+%hook SBIconBadgeView
+-(CGRect)frame {
+	CGRect ret = %orig;
+	CGFloat setNotificationBadgeTransparency = [preferences floatForKey:@"notificationBadgeTransparency"];
+	if (!(setNotificationBadgeTransparency >= 1)){
+		setNotificationBadgeTransparency = 100;
+	}
+	self.alpha = setNotificationBadgeTransparency / 100;
+	return ret;
+}
+%end
+
+%hook SBIconListView
+-(CGRect)frame {
+	CGRect ret = %orig;
+	CGFloat setIconTransparency = [preferences floatForKey:@"iconTransparency"];
+	if (!(setIconTransparency >= 8)){
+		setIconTransparency = 100;
+	}
+	self.alpha = setIconTransparency / 100;
+	return ret;
+}
+%end
+
+%hook NCNotificationListView
+-(CGRect)frame {
+	CGRect ret = %orig;
+	CGFloat setLockScreenNotificationsTransparency = [preferences floatForKey:@"lockScreenNotificationsTransparency"];
+	if (!(setLockScreenNotificationsTransparency >= 1)){
+		setLockScreenNotificationsTransparency = 100;
+	}
+	self.alpha = setLockScreenNotificationsTransparency / 100;
+	return ret;
+}
+%end
+
+%hook SBFLockScreenDateView
+-(CGRect)frame {
+	CGRect ret = %orig;
+	CGFloat setLockScreenDateTransparency = [preferences floatForKey:@"lockScreenDateTransparency"];
+	if (!(setLockScreenDateTransparency >= 1)){
+		setLockScreenDateTransparency = 100;
+	}
+	self.alpha = setLockScreenDateTransparency / 100;
+	return ret;
+}
+%end
+
+%hook SBControlCenterWindow
+-(CGRect)frame {
+	CGRect ret = %orig;
+	CGFloat setControlCenterTransparency = [preferences floatForKey:@"controlCenterTransparency"];
+	if (!(setControlCenterTransparency >= 1)){
+		setControlCenterTransparency = 100;
+	}
+	self.alpha = setControlCenterTransparency / 100;
+	return ret;
 }
 %end
 

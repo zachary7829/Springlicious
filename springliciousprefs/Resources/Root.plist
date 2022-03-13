@@ -220,6 +220,36 @@
 		</dict>
 		<dict>
 			<key>cell</key>
+			<string>PSStaticTextCell</string>
+			<key>enabled</key>
+			<true />
+			<key>label</key>
+			<string>Status Bar Opacity</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<real>100</real>
+			<key>defaults</key>
+			<string>com.zachary7829.springliciousprefs</string>
+			<key>max</key>
+			<real>100</real>
+			<key>min</key>
+			<real>1</real>
+			<key>id</key>
+			<string>statusBarTransparency</string>
+			<key>key</key>
+			<string>statusBarTransparency</string>
+			<key>showValue</key>
+            		<true/>
+			<key>isSegmented</key>
+            		<false/>
+			<key>label</key>
+			<string>Status Bar Opacity</string>
+		</dict>
+		<dict>
+			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
 			<string>Folders</string>
@@ -322,19 +352,37 @@
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>Miscellaneous</string>
+			<string>Lock Screen</string>
 		</dict>
 		<dict>
 			<key>cell</key>
-			<string>PSSwitchCell</string>
+			<string>PSStaticTextCell</string>
+			<key>enabled</key>
+			<true />
+			<key>label</key>
+			<string>Lock Screen Date Opacity</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
 			<key>default</key>
-			<false/>
+			<real>100</real>
 			<key>defaults</key>
 			<string>com.zachary7829.springliciousprefs</string>
+			<key>max</key>
+			<real>100</real>
+			<key>min</key>
+			<real>1</real>
+			<key>id</key>
+			<string>lockScreenDateTransparency</string>
 			<key>key</key>
-			<string>isEnableHideVolume</string>
+			<string>lockScreenDateTransparency</string>
+			<key>showValue</key>
+            		<true/>
+			<key>isSegmented</key>
+            		<false/>
 			<key>label</key>
-			<string>Hide Volume Slider</string>
+			<string>Lock Screen Date Opacity</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -347,6 +395,42 @@
 			<string>isEnableHideDNDBanner</string>
 			<key>label</key>
 			<string>Hide Do Not Disturb Banner</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSStaticTextCell</string>
+			<key>enabled</key>
+			<true />
+			<key>label</key>
+			<string>Lock Screen Notifications Opacity</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<real>100</real>
+			<key>defaults</key>
+			<string>com.zachary7829.springliciousprefs</string>
+			<key>max</key>
+			<real>100</real>
+			<key>min</key>
+			<real>1</real>
+			<key>id</key>
+			<string>lockScreenNotificationsTransparency</string>
+			<key>key</key>
+			<string>lockScreenNotificationsTransparency</string>
+			<key>showValue</key>
+            		<true/>
+			<key>isSegmented</key>
+            		<false/>
+			<key>label</key>
+			<string>Lock Screen Notifications Opacity</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Icons</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -383,6 +467,114 @@
 			<string>isEnableHideTestflightAppDots</string>
 			<key>label</key>
 			<string>Hide Testflight App Dots</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSStaticTextCell</string>
+			<key>enabled</key>
+			<true />
+			<key>label</key>
+			<string>Notification Badge Opacity</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<real>100</real>
+			<key>defaults</key>
+			<string>com.zachary7829.springliciousprefs</string>
+			<key>max</key>
+			<real>100</real>
+			<key>min</key>
+			<real>1</real>
+			<key>id</key>
+			<string>notificationBadgeTransparency</string>
+			<key>key</key>
+			<string>notificationBadgeTransparency</string>
+			<key>showValue</key>
+            		<true/>
+			<key>isSegmented</key>
+            		<false/>
+			<key>label</key>
+			<string>Notification Badge Opacity</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSStaticTextCell</string>
+			<key>enabled</key>
+			<true />
+			<key>label</key>
+			<string>Icon Opacity</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<real>100</real>
+			<key>defaults</key>
+			<string>com.zachary7829.springliciousprefs</string>
+			<key>max</key>
+			<real>100</real>
+			<key>min</key>
+			<real>10</real>
+			<key>id</key>
+			<string>iconTransparency</string>
+			<key>key</key>
+			<string>iconTransparency</string>
+			<key>showValue</key>
+            		<true/>
+			<key>isSegmented</key>
+            		<false/>
+			<key>label</key>
+			<string>Icon Opacity</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Miscellaneous</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSStaticTextCell</string>
+			<key>enabled</key>
+			<true />
+			<key>label</key>
+			<string>Control Center Opacity</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<real>100</real>
+			<key>defaults</key>
+			<string>com.zachary7829.springliciousprefs</string>
+			<key>max</key>
+			<real>100</real>
+			<key>min</key>
+			<real>10</real>
+			<key>id</key>
+			<string>controlCenterTransparency</string>
+			<key>key</key>
+			<string>controlCenterTransparency</string>
+			<key>showValue</key>
+            		<true/>
+			<key>isSegmented</key>
+            		<false/>
+			<key>label</key>
+			<string>Control Center Opacity</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.zachary7829.springliciousprefs</string>
+			<key>key</key>
+			<string>isEnableHideVolume</string>
+			<key>label</key>
+			<string>Hide Volume Slider</string>
 		</dict>
 		<dict>
 			<key>cell</key>
