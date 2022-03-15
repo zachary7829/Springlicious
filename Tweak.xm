@@ -47,6 +47,15 @@ NSUserDefaults *preferences;
 @interface SBControlCenterWindow : UIView
 @end
 
+@interface _UIBatteryView : UIView
+@property (assign,nonatomic) double bodyColorAlpha;
+@property (assign,nonatomic) double pinColorAlpha;
+@property (nonatomic, copy, readwrite) UIColor *fillColor;
+-(void)setBodyColor:(UIColor *)arg1;
+-(void)setPinColor:(UIColor *)arg1;
+-(void)setFillColor:(UIColor *)arg1;
+@end
+
 %hook SBDockView
 -(CGRect)frame {
 	CGRect ret = %orig;
@@ -179,8 +188,33 @@ NSUserDefaults *preferences;
 
 %hook _UIBatteryView
 -(void)setShowsInlineChargingIndicator:(BOOL)enabled {
+    SEL colorBattOutlineSelector = NSSelectorFromString([preferences stringForKey:@"battery_outline_color_pref"]);
     if ([preferences boolForKey:@"isEnableHideBatteryCharge"]) {
+        if (colorBattOutlineSelector && [UIColor respondsToSelector:colorBattOutlineSelector]) {
+            [self setBodyColor:((UIColor*(*)(Class, SEL)) objc_msgSend) (UIColor.class, colorBattOutlineSelector)];
+            [self setPinColor:((UIColor*(*)(Class, SEL)) objc_msgSend) (UIColor.class, colorBattOutlineSelector)];
+        }
         %orig(0);
+    } else {
+        if (colorBattOutlineSelector && [UIColor respondsToSelector:colorBattOutlineSelector]) {
+            [self setBodyColor:((UIColor*(*)(Class, SEL)) objc_msgSend) (UIColor.class, colorBattOutlineSelector)];
+            [self setPinColor:((UIColor*(*)(Class, SEL)) objc_msgSend) (UIColor.class, colorBattOutlineSelector)];
+        }
+        %orig;
+    }
+}
+-(void)setFillColor:(UIColor*)arg0 {
+    SEL colorBattFillSelector = NSSelectorFromString([preferences stringForKey:@"battery_fill_color_pref"]);
+
+    if (colorBattFillSelector && [UIColor respondsToSelector:colorBattFillSelector]) {
+        %orig(((UIColor*(*)(Class, SEL)) objc_msgSend) (UIColor.class, colorBattFillSelector));
+    } else {
+        %orig;
+    }
+}
+-(void)setShowsPercentage:(bool)arg1 {
+    if ([preferences boolForKey:@"isEnableBatteryPercentInBatt"]) {
+        %orig(YES);
     } else {
         %orig;
     }
@@ -223,15 +257,7 @@ NSUserDefaults *preferences;
 }
 %end
 
-%hook SBFolderIconImageView
--(void)setBackgroundView:(UIView *)arg1 {
-    if ([preferences boolForKey:@"isEnableHideFolderIconBackground"]) {
-        %orig(nil); //this seems to work also but seems to fuck up the animation lol, will fix latr
-    } else {
-        %orig;
-    }
-}
-%end
+// SBWallpaperEffectView  hide folder icon background
 
 %hook DNDNotificationsService
 -(void)_queue_postOrRemoveNotificationWithUpdatedBehavior:(BOOL)arg1 significantTimeChange:(BOOL)arg2{
@@ -269,7 +295,7 @@ NSUserDefaults *preferences;
 %end
 
 %hook SBIconView
-- (void)setLabelHidden:(BOOL)arg1 {
+-(void)setLabelHidden:(BOOL)arg1 {
     if ([preferences boolForKey:@"isEnableHideAppLabels"]) {
         %orig(YES);
     } else {
@@ -356,7 +382,7 @@ NSUserDefaults *preferences;
 }
 %end
 
-%hook NCNotificationListView
+%hook NCNotificationListView //slightly buggy/flashy, may be fixed by hooking NCNotificationStructuredListViewController instead
 -(CGRect)frame {
 	CGRect ret = %orig;
 	CGFloat setLockScreenNotificationsTransparency = [preferences floatForKey:@"lockScreenNotificationsTransparency"];
@@ -391,6 +417,14 @@ NSUserDefaults *preferences;
 	return ret;
 }
 %end
+
+/*
+%hook SBFDeviceBlockTimer //thanks to nyuszika7h for this, may be used latr
+-(NSString *)subtitleText {
+    return @"suck my cock";
+}
+%end
+*/
 
 %ctor {
   preferences = [[NSUserDefaults alloc] initWithSuiteName:@"com.zachary7829.springliciousprefs"];

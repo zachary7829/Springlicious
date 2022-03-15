@@ -87,7 +87,7 @@
             		<array>
 				<string>Default</string>
                 			<string>redColor</string>
-                			<string>whiteColor</string>
+                			<string>blueColor</string>
                 			<string>yellowColor</string>
                 			<string>orangeColor</string>
                 			<string>magentaColor</string>
@@ -247,6 +247,102 @@
             		<false/>
 			<key>label</key>
 			<string>Status Bar Opacity</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.zachary7829.springliciousprefs</string>
+			<key>key</key>
+			<string>isEnableBatteryPercentInBatt</string>
+			<key>label</key>
+			<string>Enable Battery Percent</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkListCell</string>
+			<key>defaults</key>
+            		<string>com.zachary7829.springliciousprefs</string>
+			<key>detail</key>
+           		<string>PSListItemsController</string>
+            		<key>key</key>
+            		<string>battery_fill_color_pref</string>
+            		<key>label</key>
+            		<string>Battery Fill Color</string>
+            		<key>validTitles</key>
+            		<array>
+				<string>Default</string>
+                			<string>Red</string>
+                			<string>Blue</string>
+                			<string>Yellow</string>
+                			<string>Orange</string>
+                			<string>Gray</string>
+                			<string>Pink</string>
+                			<string>Indigo</string>
+                			<string>Purple</string>
+                			<string>Green</string>
+                			<string>Teal</string>
+                			<string>Brown</string>
+            		</array>
+            		<key>validValues</key>
+            		<array>
+				<string>Default</string>
+                			<string>systemRedColor</string>
+                			<string>systemBlueColor</string>
+                			<string>systemYellowColor</string>
+                			<string>systemOrangeColor</string>
+                			<string>systemGrayColor</string>
+                			<string>systemPinkColor</string>
+                			<string>systemIndigoColor</string>
+                			<string>systemPurpleColor</string>
+                			<string>systemGreenColor</string>
+                			<string>systemTealColor</string>
+                			<string>systemBrownColor</string>
+            		</array>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkListCell</string>
+			<key>defaults</key>
+            		<string>com.zachary7829.springliciousprefs</string>
+			<key>detail</key>
+           		<string>PSListItemsController</string>
+            		<key>key</key>
+            		<string>battery_outline_color_pref</string>
+            		<key>label</key>
+            		<string>Battery Outline Color</string>
+            		<key>validTitles</key>
+            		<array>
+				<string>Default</string>
+                			<string>Red</string>
+                			<string>Blue</string>
+                			<string>Yellow</string>
+                			<string>Orange</string>
+                			<string>Gray</string>
+                			<string>Pink</string>
+                			<string>Indigo</string>
+                			<string>Purple</string>
+                			<string>Green</string>
+                			<string>Teal</string>
+                			<string>Brown</string>
+            		</array>
+            		<key>validValues</key>
+            		<array>
+				<string>Default</string>
+                			<string>systemRedColor</string>
+                			<string>systemBlueColor</string>
+                			<string>systemYellowColor</string>
+                			<string>systemOrangeColor</string>
+                			<string>systemGrayColor</string>
+                			<string>systemPinkColor</string>
+                			<string>systemIndigoColor</string>
+                			<string>systemPurpleColor</string>
+                			<string>systemGreenColor</string>
+                			<string>systemTealColor</string>
+                			<string>systemBrownColor</string>
+            		</array>
 		</dict>
 		<dict>
 			<key>cell</key>
