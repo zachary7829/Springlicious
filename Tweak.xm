@@ -47,6 +47,9 @@ NSUserDefaults *preferences;
 @interface SBControlCenterWindow : UIView
 @end
 
+@interface SBVolumeHUDViewController : UIViewController
+@end
+
 @interface _UIBatteryView : UIView
 @property (assign,nonatomic) double bodyColorAlpha;
 @property (assign,nonatomic) double pinColorAlpha;
@@ -158,10 +161,10 @@ NSUserDefaults *preferences;
 
 %hook SBVolumeHUDViewController
 -(void)viewDidLoad {
-    if ([preferences boolForKey:@"isEnableHideVolume"]) {
+	%orig;
 
-    } else {
-        return %orig;
+    if ([preferences boolForKey:@"isEnableHideVolume"]) {
+		self.view.hidden = YES;
     }
 }
 %end
