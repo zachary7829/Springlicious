@@ -24,6 +24,18 @@
 		</dict>
 		<dict>
 			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.zachary7829.springliciousprefs</string>
+			<key>key</key>
+			<string>isEnableHideDockBackground</string>
+			<key>label</key>
+			<string>Make Dock Background Invisible</string>
+		</dict>
+		<dict>
+			<key>cell</key>
 			<string>PSStaticTextCell</string>
 			<key>enabled</key>
 			<true />
@@ -100,7 +112,7 @@
                 			<string>brownColor</string>
                 			<string>cyanColor</string>
                 			<string>purpleColor</string>
-                			<string>lightTextColorr</string>
+                			<string>lightTextColor</string>
                 			<string>blackColor</string>
             		</array>
 		</dict>
@@ -313,6 +325,90 @@
             		<string>battery_outline_color_pref</string>
             		<key>label</key>
             		<string>Battery Outline Color</string>
+            		<key>validTitles</key>
+            		<array>
+				<string>Default</string>
+                			<string>Red</string>
+                			<string>Blue</string>
+                			<string>Yellow</string>
+                			<string>Orange</string>
+                			<string>Gray</string>
+                			<string>Pink</string>
+                			<string>Indigo</string>
+                			<string>Purple</string>
+                			<string>Green</string>
+                			<string>Teal</string>
+                			<string>Brown</string>
+            		</array>
+            		<key>validValues</key>
+            		<array>
+				<string>Default</string>
+                			<string>systemRedColor</string>
+                			<string>systemBlueColor</string>
+                			<string>systemYellowColor</string>
+                			<string>systemOrangeColor</string>
+                			<string>systemGrayColor</string>
+                			<string>systemPinkColor</string>
+                			<string>systemIndigoColor</string>
+                			<string>systemPurpleColor</string>
+                			<string>systemGreenColor</string>
+                			<string>systemTealColor</string>
+                			<string>systemBrownColor</string>
+            		</array>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkListCell</string>
+			<key>defaults</key>
+            		<string>com.zachary7829.springliciousprefs</string>
+			<key>detail</key>
+           		<string>PSListItemsController</string>
+            		<key>key</key>
+            		<string>battery_fill_charge_color_pref</string>
+            		<key>label</key>
+            		<string>Battery Charging Fill Color</string>
+            		<key>validTitles</key>
+            		<array>
+				<string>Default</string>
+                			<string>Red</string>
+                			<string>Blue</string>
+                			<string>Yellow</string>
+                			<string>Orange</string>
+                			<string>Gray</string>
+                			<string>Pink</string>
+                			<string>Indigo</string>
+                			<string>Purple</string>
+                			<string>Green</string>
+                			<string>Teal</string>
+                			<string>Brown</string>
+            		</array>
+            		<key>validValues</key>
+            		<array>
+				<string>Default</string>
+                			<string>systemRedColor</string>
+                			<string>systemBlueColor</string>
+                			<string>systemYellowColor</string>
+                			<string>systemOrangeColor</string>
+                			<string>systemGrayColor</string>
+                			<string>systemPinkColor</string>
+                			<string>systemIndigoColor</string>
+                			<string>systemPurpleColor</string>
+                			<string>systemGreenColor</string>
+                			<string>systemTealColor</string>
+                			<string>systemBrownColor</string>
+            		</array>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkListCell</string>
+			<key>defaults</key>
+            		<string>com.zachary7829.springliciousprefs</string>
+			<key>detail</key>
+           		<string>PSListItemsController</string>
+            		<key>key</key>
+            		<string>battery_outline_charge_color_pref</string>
+            		<key>label</key>
+            		<string>Battery Charging Outline Color</string>
             		<key>validTitles</key>
             		<array>
 				<string>Default</string>

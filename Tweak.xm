@@ -53,10 +53,13 @@ NSUserDefaults *preferences;
 @interface _UIBatteryView : UIView
 @property (assign,nonatomic) double bodyColorAlpha;
 @property (assign,nonatomic) double pinColorAlpha;
-@property (nonatomic, copy, readwrite) UIColor *fillColor;
+@property (assign,nonatomic) double chargePercent;
+@property (assign,nonatomic) bool saverModeActive; //for later
+@property(nonatomic, assign, readwrite) NSInteger chargingState;
 -(void)setBodyColor:(UIColor *)arg1;
 -(void)setPinColor:(UIColor *)arg1;
 -(void)setFillColor:(UIColor *)arg1;
+-(void)_updateBatteryFillColor;
 @end
 
 %hook SBDockView
@@ -109,6 +112,13 @@ NSUserDefaults *preferences;
 	self.alpha = setDockTransparency / 100;
 	return ret;
 }
+-(void)setBackgroundAlpha:(double)arg1{
+    if ([preferences boolForKey:@"isEnableHideDockBackground"]) {
+        %orig(0.0);
+    } else {
+        %orig;
+    }
+}
 -(void)setHidden:(BOOL)arg1 {
     if ([preferences boolForKey:@"isEnableHideDock"]) {
         %orig(YES);
@@ -149,7 +159,6 @@ NSUserDefaults *preferences;
     }
 }
 -(void)setBackgroundView:(UIView *)view {
-    //YandereDev code time, what's a switch case anyway?
     SEL colorSelector = NSSelectorFromString([preferences stringForKey:@"color_pref"]);
 
     if (colorSelector && [UIColor respondsToSelector:colorSelector]) {
@@ -179,7 +188,7 @@ NSUserDefaults *preferences;
 }
 %end
 
-%hook SBTelephonyManager
+%hook SBTelephonyManager //switch to hooking view
 -(bool)isUsingVPNConnection {
     if ([preferences boolForKey:@"isEnableHideVPN"]) {
         return 0;
@@ -191,35 +200,56 @@ NSUserDefaults *preferences;
 
 %hook _UIBatteryView
 -(void)setShowsInlineChargingIndicator:(BOOL)enabled {
-    SEL colorBattOutlineSelector = NSSelectorFromString([preferences stringForKey:@"battery_outline_color_pref"]);
     if ([preferences boolForKey:@"isEnableHideBatteryCharge"]) {
-        if (colorBattOutlineSelector && [UIColor respondsToSelector:colorBattOutlineSelector]) {
-            [self setBodyColor:((UIColor*(*)(Class, SEL)) objc_msgSend) (UIColor.class, colorBattOutlineSelector)];
-            [self setPinColor:((UIColor*(*)(Class, SEL)) objc_msgSend) (UIColor.class, colorBattOutlineSelector)];
-        }
         %orig(0);
     } else {
+        if ([preferences boolForKey:@"isEnableBatteryPercentInBatt"]) {
+            %orig(0);
+        } else {
+            %orig;
+        }
+    }
+}
+-(void)setChargingState:(NSInteger)batteryischarging {
+    SEL colorBattOutlineSelector = NSSelectorFromString([preferences stringForKey:@"battery_outline_color_pref"]);
+    SEL colorBattOutlineChargeSelector = NSSelectorFromString([preferences stringForKey:@"battery_outline_charge_color_pref"]);
+
+    if (batteryischarging) {
+        if (colorBattOutlineChargeSelector && [UIColor respondsToSelector:colorBattOutlineChargeSelector]) {
+            [self setBodyColor:((UIColor*(*)(Class, SEL)) objc_msgSend) (UIColor.class, colorBattOutlineChargeSelector)];
+            [self setPinColor:((UIColor*(*)(Class, SEL)) objc_msgSend) (UIColor.class, colorBattOutlineChargeSelector)];
+        }
+    } else {
         if (colorBattOutlineSelector && [UIColor respondsToSelector:colorBattOutlineSelector]) {
             [self setBodyColor:((UIColor*(*)(Class, SEL)) objc_msgSend) (UIColor.class, colorBattOutlineSelector)];
             [self setPinColor:((UIColor*(*)(Class, SEL)) objc_msgSend) (UIColor.class, colorBattOutlineSelector)];
         }
-        %orig;
     }
-}
--(void)setFillColor:(UIColor*)arg0 {
-    SEL colorBattFillSelector = NSSelectorFromString([preferences stringForKey:@"battery_fill_color_pref"]);
-
-    if (colorBattFillSelector && [UIColor respondsToSelector:colorBattFillSelector]) {
-        %orig(((UIColor*(*)(Class, SEL)) objc_msgSend) (UIColor.class, colorBattFillSelector));
-    } else {
-        %orig;
-    }
+    %orig;
 }
 -(void)setShowsPercentage:(bool)arg1 {
     if ([preferences boolForKey:@"isEnableBatteryPercentInBatt"]) {
         %orig(YES);
     } else {
         %orig;
+    }
+}
+-(id)_batteryFillColor {
+    SEL colorBattFillSelector = NSSelectorFromString([preferences stringForKey:@"battery_fill_color_pref"]);
+    SEL colorBattFillChargeSelector = NSSelectorFromString([preferences stringForKey:@"battery_fill_charge_color_pref"]);
+
+    if (self.chargingState != 0) {
+        if (colorBattFillChargeSelector && [UIColor respondsToSelector:colorBattFillChargeSelector]) {
+            return ((UIColor*(*)(Class, SEL)) objc_msgSend) (UIColor.class, colorBattFillChargeSelector);
+        } else {
+            return %orig;
+        }
+    } else {
+        if (colorBattFillSelector && [UIColor respondsToSelector:colorBattFillSelector]) {
+            return ((UIColor*(*)(Class, SEL)) objc_msgSend) (UIColor.class, colorBattFillSelector);
+        } else {
+            return %orig;
+        }
     }
 }
 %end

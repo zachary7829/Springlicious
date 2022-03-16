@@ -1,5 +1,5 @@
 ARCHS = arm64 arm64e
-TARGET = iphone:clang:14.8:13.0
+TARGET = iphone:clang:14.8.1:13.0
 PREFIX = $(THEOS)/toolchain/Xcode.xctoolchain/usr/bin/
 SYSROOT = $(THEOS)/sdks/iPhoneOS14.5.sdk
 include $(THEOS)/makefiles/common.mk
