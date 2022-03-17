@@ -53,7 +53,7 @@ NSUserDefaults *preferences;
 @interface _UIBatteryView : UIView
 @property (assign,nonatomic) double bodyColorAlpha;
 @property (assign,nonatomic) double pinColorAlpha;
-@property (assign,nonatomic) double chargePercent;
+@property (assign,nonatomic,readwrite) CGFloat chargePercent;
 @property (assign,nonatomic) bool saverModeActive; //for later
 @property(nonatomic, assign, readwrite) NSInteger chargingState;
 -(void)setBodyColor:(UIColor *)arg1;
@@ -111,13 +111,6 @@ NSUserDefaults *preferences;
 	}
 	self.alpha = setDockTransparency / 100;
 	return ret;
-}
--(void)setBackgroundAlpha:(double)arg1{
-    if ([preferences boolForKey:@"isEnableHideDockBackground"]) {
-        %orig(0.0);
-    } else {
-        %orig;
-    }
 }
 -(void)setHidden:(BOOL)arg1 {
     if ([preferences boolForKey:@"isEnableHideDock"]) {
@@ -252,19 +245,36 @@ NSUserDefaults *preferences;
         }
     }
 }
-%end
-
-%hook BCBatteryDevice //change to hooking the uiview, hooking bcbatterydevice while more affective can potentially fuck up battery stats in settings
--(long long)percentCharge {
+-(void)setChargePercent:(CGFloat)arg1 {
     if ([preferences boolForKey:@"isSpoofBatteryPercent"]) {
 	CGFloat setSpoofBatteryPercent = [preferences floatForKey:@"spoofBattery"];
 	if (!(setSpoofBatteryPercent >= 3)){
 		setSpoofBatteryPercent = 100;
 	}
-        return setSpoofBatteryPercent; //For faking device percentage, finish later
+        %orig(setSpoofBatteryPercent / 100);
     } else {
-        return %orig;
+        %orig;
     }
+}
+%end
+
+%hook _UIStatusBarStringView
+-(void)setText:(NSString *)text {
+	if ([preferences boolForKey:@"isSpoofBatteryPercent"]) {
+		if ([text containsString:@"%"]) {
+			CGFloat setSpoofBatteryPercent = [preferences floatForKey:@"spoofBattery"];
+			if (!(setSpoofBatteryPercent >= 3)){
+				setSpoofBatteryPercent = 100;
+			}
+			int setSpoofBatteryPercentInt = (int) setSpoofBatteryPercent;
+			NSString * setSpoofBatteryPercentString = [NSString stringWithFormat:@"%d%%",setSpoofBatteryPercentInt];
+			%orig(setSpoofBatteryPercentString);
+		} else {
+			%orig;
+		}
+	} else {
+		%orig;
+	}
 }
 %end
 

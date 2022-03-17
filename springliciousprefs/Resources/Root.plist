@@ -32,7 +32,7 @@
 			<key>key</key>
 			<string>isEnableHideDockBackground</string>
 			<key>label</key>
-			<string>Make Dock Background Invisible</string>
+			<string>Make Dock Background Invisible (iPhone Only)</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -172,6 +172,18 @@
 			<key>defaults</key>
 			<string>com.zachary7829.springliciousprefs</string>
 			<key>key</key>
+			<string>isEnableHideWifiConnection</string>
+			<key>label</key>
+			<string>Disable Wifi Symbol</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.zachary7829.springliciousprefs</string>
+			<key>key</key>
 			<string>isEnableHideBatteryCharge</string>
 			<key>label</key>
 			<string>Disable Battery Charge Symbol</string>
@@ -217,18 +229,6 @@
             		<false/>
 			<key>label</key>
 			<string>Spoof Battery Percent</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>com.zachary7829.springliciousprefs</string>
-			<key>key</key>
-			<string>isEnableHideWifiConnection</string>
-			<key>label</key>
-			<string>Disable Wifi Symbol</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -548,6 +548,18 @@
 		</dict>
 		<dict>
 			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.zachary7829.springliciousprefs</string>
+			<key>key</key>
+			<string>isEnableHideDNDBanner</string>
+			<key>label</key>
+			<string>Hide Do Not Disturb Banner</string>
+		</dict>
+		<dict>
+			<key>cell</key>
 			<string>PSStaticTextCell</string>
 			<key>enabled</key>
 			<true />
@@ -575,18 +587,6 @@
             		<false/>
 			<key>label</key>
 			<string>Lock Screen Date Opacity</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>com.zachary7829.springliciousprefs</string>
-			<key>key</key>
-			<string>isEnableHideDNDBanner</string>
-			<key>label</key>
-			<string>Hide Do Not Disturb Banner</string>
 		</dict>
 		<dict>
 			<key>cell</key>
