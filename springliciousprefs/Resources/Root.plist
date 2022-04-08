@@ -218,7 +218,7 @@
 			<key>max</key>
 			<real>100</real>
 			<key>min</key>
-			<real>5</real>
+			<real>1</real>
 			<key>id</key>
 			<string>spoofBattery</string>
 			<key>key</key>
@@ -620,6 +620,30 @@
 		</dict>
 		<dict>
 			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>com.zachary7829.springliciousprefs</string>
+			<key>key</key>
+			<string>isEnableCustomDisableSubtitleText</string>
+			<key>label</key>
+			<string>Enable Custom Disable Subtitle</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSEditTextCell</string>
+			<key>default</key>
+			<string>Springlicious Disable Subtext</string>
+			<key>defaults</key>
+			<string>com.zachary7829.springliciousprefs</string>
+			<key>key</key>
+			<string>iDeviceDisableText</string>
+			<key>placeholder</key>
+			<string>Springlicious Disable Subtext</string>
+		</dict>
+		<dict>
+			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
 			<string>Icons</string>
@@ -662,6 +686,18 @@
 		</dict>
 		<dict>
 			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.zachary7829.springliciousprefs</string>
+			<key>key</key>
+			<string>isEnableHideRecentlyUpdatedAppDots</string>
+			<key>label</key>
+			<string>Hide Update App Dots</string>
+		</dict>
+		<dict>
+			<key>cell</key>
 			<string>PSStaticTextCell</string>
 			<key>enabled</key>
 			<true />
@@ -689,6 +725,58 @@
             		<false/>
 			<key>label</key>
 			<string>Notification Badge Opacity</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkListCell</string>
+			<key>defaults</key>
+            		<string>com.zachary7829.springliciousprefs</string>
+			<key>detail</key>
+           		<string>PSListItemsController</string>
+            		<key>key</key>
+            		<string>notif_badge_color_pref</string>
+            		<key>label</key>
+            		<string>Notification Badge Color</string>
+            		<key>validTitles</key>
+            		<array>
+				<string>Default</string>
+                			<string>Red</string>
+                			<string>Blue</string>
+                			<string>Yellow</string>
+                			<string>Orange</string>
+                			<string>Magenta</string>
+                			<string>White</string>
+                			<string>Light Gray</string>
+                			<string>Dark Gray</string>
+                			<string>Green</string>
+                			<string>Gray</string>
+                			<string>Clear</string>
+                			<string>Brown</string>
+                			<string>Cyan</string>
+                			<string>Purple</string>
+                			<string>Light Text Color</string>
+                			<string>Black</string>
+            		</array>
+            		<key>validValues</key>
+            		<array>
+				<string>Default</string>
+                			<string>redColor</string>
+                			<string>blueColor</string>
+                			<string>yellowColor</string>
+                			<string>orangeColor</string>
+                			<string>magentaColor</string>
+                			<string>whiteColor</string>
+                			<string>lightGrayColor</string>
+                			<string>darkGrayColor</string>
+                			<string>greenColor</string>
+                			<string>grayColor</string>
+                			<string>clearColor</string>
+                			<string>brownColor</string>
+                			<string>cyanColor</string>
+                			<string>purpleColor</string>
+                			<string>lightTextColor</string>
+                			<string>blackColor</string>
+            		</array>
 		</dict>
 		<dict>
 			<key>cell</key>

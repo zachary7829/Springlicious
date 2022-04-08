@@ -29,16 +29,23 @@ NSUserDefaults *preferences;
 @interface SBIconBetaLabelAccessoryView : UIView
 @end
 
+@interface SBIconRecentlyUpdatedLabelAccessoryView : UIView
+@end
+
 @interface SBFolderControllerBackgroundView : UIView
 @end
 
 @interface SBIconBadgeView : UIView
 @end
 
+@interface SBDarkeningImageView : UIImageView
+@property (nonatomic, retain) UIColor* tintColor;
+@end
+
 @interface SBIconListView : UIView
 @end
 
-@interface NCNotificationListView : UIView
+@interface NCNotificationStructuredListViewController : UIViewController
 @end
 
 @interface SBFLockScreenDateView : UIView
@@ -48,6 +55,9 @@ NSUserDefaults *preferences;
 @end
 
 @interface SBVolumeHUDViewController : UIViewController
+@end
+
+@interface NCNotificationShortLookView : UIView
 @end
 
 @interface _UIBatteryView : UIView
@@ -248,7 +258,7 @@ NSUserDefaults *preferences;
 -(void)setChargePercent:(CGFloat)arg1 {
     if ([preferences boolForKey:@"isSpoofBatteryPercent"]) {
 	CGFloat setSpoofBatteryPercent = [preferences floatForKey:@"spoofBattery"];
-	if (!(setSpoofBatteryPercent >= 3)){
+	if (!(setSpoofBatteryPercent >= 1)){
 		setSpoofBatteryPercent = 100;
 	}
         %orig(setSpoofBatteryPercent / 100);
@@ -263,7 +273,7 @@ NSUserDefaults *preferences;
 	if ([preferences boolForKey:@"isSpoofBatteryPercent"]) {
 		if ([text containsString:@"%"]) {
 			CGFloat setSpoofBatteryPercent = [preferences floatForKey:@"spoofBattery"];
-			if (!(setSpoofBatteryPercent >= 3)){
+			if (!(setSpoofBatteryPercent >= 1)){
 				setSpoofBatteryPercent = 100;
 			}
 			int setSpoofBatteryPercentInt = (int) setSpoofBatteryPercent;
@@ -411,6 +421,27 @@ NSUserDefaults *preferences;
 	self.alpha = setNotificationBadgeTransparency / 100;
 	return ret;
 }
+-(id)tintColor {
+    SEL colorNotifBadgeSelector = NSSelectorFromString([preferences stringForKey:@"notif_badge_color_pref"]);
+
+    if (colorNotifBadgeSelector && [UIColor respondsToSelector:colorNotifBadgeSelector]) {
+        return ((UIColor*(*)(Class, SEL)) objc_msgSend) (UIColor.class, colorNotifBadgeSelector);
+    } else {
+        return %orig;
+    }
+}
+%end
+
+%hook SBDarkeningImageView
+-(UIColor*)tintColor {
+    SEL colorNotifBadgeSelector = NSSelectorFromString([preferences stringForKey:@"notif_badge_color_pref"]);
+
+    if (colorNotifBadgeSelector && [UIColor respondsToSelector:colorNotifBadgeSelector]) {
+        return ((UIColor*(*)(Class, SEL)) objc_msgSend) (UIColor.class, colorNotifBadgeSelector);
+    } else {
+        return %orig;
+    }
+}
 %end
 
 %hook SBIconListView
@@ -425,15 +456,14 @@ NSUserDefaults *preferences;
 }
 %end
 
-%hook NCNotificationListView //slightly buggy/flashy, may be fixed by hooking NCNotificationStructuredListViewController instead
--(CGRect)frame {
-	CGRect ret = %orig;
+%hook NCNotificationStructuredListViewController
+-(void)viewDidLoad {
+	%orig;
 	CGFloat setLockScreenNotificationsTransparency = [preferences floatForKey:@"lockScreenNotificationsTransparency"];
 	if (!(setLockScreenNotificationsTransparency >= 1)){
 		setLockScreenNotificationsTransparency = 100;
 	}
-	self.alpha = setLockScreenNotificationsTransparency / 100;
-	return ret;
+	self.view.alpha = setLockScreenNotificationsTransparency / 100;
 }
 %end
 
@@ -461,13 +491,31 @@ NSUserDefaults *preferences;
 }
 %end
 
-/*
-%hook SBFDeviceBlockTimer //thanks to nyuszika7h for this, may be used latr
--(NSString *)subtitleText {
-    return @"suck my cock";
+%hook SBIconRecentlyUpdatedLabelAccessoryView
+-(CGRect)frame {
+    if ([preferences boolForKey:@"isEnableHideRecentlyUpdatedAppDots"]) {
+        CGRect ret = %orig;
+        self.hidden = YES;
+        return ret;
+    } else {
+        return %orig;
+    }
 }
 %end
-*/
+
+%hook SBFDeviceBlockTimer //thanks to nyuszika7h for this
+-(NSString *)subtitleText {
+    if ([preferences boolForKey:@"isEnableCustomDisableSubtitleText"]) {
+	if (!([preferences objectForKey:@"iDeviceDisableText"])){
+	    return %orig;
+	} else {
+	    return [preferences objectForKey:@"iDeviceDisableText"];
+	}
+    } else {
+        return %orig;
+    }
+}
+%end
 
 %ctor {
   preferences = [[NSUserDefaults alloc] initWithSuiteName:@"com.zachary7829.springliciousprefs"];
